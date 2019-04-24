@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name         = "PGDatePicker-fork"
-  s.version      = "1.0.0"
+  s.version      = "7.0.0"
   s.summary      = "日期选择器"
   s.homepage     = "https://github.com/sugerGDev/PGDatePicker"
   s.license      = "MIT"
