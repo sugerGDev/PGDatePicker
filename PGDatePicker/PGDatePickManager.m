@@ -9,9 +9,10 @@
 #import "PGDatePickManagerHeaderView.h"
 
 @interface PGDatePickManager ()
-@property (nonatomic, weak) UIView *contentView;
+
 @property (nonatomic, weak) PGDatePickManagerHeaderView *headerView;
 @property (nonatomic, weak) UIView *dismissView;
+@property(nonatomic, strong) UILabel *headTitleLabel;
 @end
 
 @implementation PGDatePickManager
@@ -112,18 +113,21 @@
     }
     CGFloat rowHeight = self.datePicker.rowHeight;
     CGFloat headerViewHeight = self.headerHeight;
-    CGFloat contentViewHeight = rowHeight * 5 + headerViewHeight;
-    CGFloat datePickerHeight = contentViewHeight - headerViewHeight - bottom;
+    CGFloat titleHeight = 49.f;
+    
+    CGFloat contentViewHeight = rowHeight * 5 + headerViewHeight + titleHeight;
+    CGFloat datePickerHeight = contentViewHeight - headerViewHeight - bottom - titleHeight;
     CGRect contentViewFrame = CGRectMake(0,
                                          self.view.bounds.size.height - contentViewHeight,
                                          self.view.bounds.size.width,
                                          contentViewHeight);
-    CGRect headerViewFrame = CGRectMake(0, 0, self.view.bounds.size.width, headerViewHeight);
+    CGRect headerViewFrame = CGRectMake(0, titleHeight + datePickerHeight, self.view.bounds.size.width, headerViewHeight);
     CGRect datePickerFrame = CGRectMake(0,
-                                        CGRectGetMaxY(headerViewFrame),
+                                        titleHeight,
                                         self.view.bounds.size.width,
                                         datePickerHeight);
     
+    self.headTitleLabel.frame = CGRectMake(0, 0,  self.view.bounds.size.width, 49);
     self.contentView.frame = CGRectMake(0,
                                         self.view.bounds.size.height,
                                         self.view.bounds.size.width,
@@ -299,6 +303,24 @@
         _titleLabel = self.headerView.titleLabel;
     }
     return _titleLabel;
+}
+
+- (UILabel *)headTitleLabel {
+    if (!_headTitleLabel) {
+        _headTitleLabel = [[UILabel alloc]init];
+        _headTitleLabel.font = [UIFont boldSystemFontOfSize:18.f];
+        _headTitleLabel.textColor = [UIColor pg_colorWithHexString:@"#333333"];
+        _headTitleLabel.text = @"选择日期";
+        _headTitleLabel.textAlignment = NSTextAlignmentCenter;
+        _headTitleLabel.frame = CGRectMake(0, 0,  self.view.bounds.size.width, 49);
+        
+        UIView *line = [[UIView alloc]init];
+        line.backgroundColor = [UIColor pg_colorWithHexString:@"#E5E5E5"];
+        line.frame = CGRectMake(0.f, _headTitleLabel.frame.size.height, _headTitleLabel.frame.size.width, 0.5f);
+        [_headTitleLabel addSubview:line];
+        [self.contentView addSubview:_headTitleLabel];
+    }
+    return _headTitleLabel;
 }
 
 @end

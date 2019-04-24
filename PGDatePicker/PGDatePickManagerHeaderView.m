@@ -43,10 +43,9 @@
                                        self.titleLabelSize.width,
                                        self.bounds.size.height);
     if (self.style == PGDatePickManagerStyleSheet) {
-        self.lineView.hidden = true;
-        [self setyle1];
+        [self setyle2];
     }else if (self.style == PGDatePickManagerStyleAlertTopButton) {
-        [self setyle1];
+        [self setyle2];
     }else if (self.style == PGDatePickManagerStyleAlertBottomButton) {
         [self setyle2];
     }
@@ -139,7 +138,7 @@
 - (UIView *)lineView {
     if (!_lineView) {
         UIView *view = [[UIView alloc]init];
-        view.backgroundColor = [UIColor lightGrayColor];
+        view.backgroundColor = [UIColor pg_colorWithHexString:@"E6E6E6"];
         [self addSubview:view];
         _lineView = view;
     }
@@ -161,7 +160,7 @@
 - (UIView *)middleLineView {
     if (!_middleLineView) {
         UIView *view = [[UIView alloc]init];
-        view.backgroundColor = [UIColor lightGrayColor];
+        view.backgroundColor = [UIColor pg_colorWithHexString:@"E6E6E6"];
         [self addSubview:view];
         _middleLineView = view;
     }

@@ -11,6 +11,11 @@
 
 @interface PGDatePickManager : UIViewController
 
+/**
+当前ContentView 
+ */
+@property (nonatomic, weak) UIView *contentView;
+
 @property (nonatomic, weak) PGDatePicker *datePicker;
 @property (nonatomic, assign) PGDatePickManagerStyle style;
 @property (nonatomic, assign) BOOL isShadeBackground;
